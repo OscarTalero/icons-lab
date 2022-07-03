@@ -41,8 +41,8 @@ public class PaisEntity {
             })
     @JoinTable(
             name = "icons_pais",
-            joinColumns = @JoinColumn(name = "pais_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "icon_id", nullable = false))
+            joinColumns = @JoinColumn(name = "pais_id"),
+            inverseJoinColumns = @JoinColumn(name = "icon_id"))
     private Set<IconEntity> icons = new HashSet<>();
 
     @Override
