@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContinenteServiceImpl implements ContinenteService {
@@ -31,5 +32,23 @@ public class ContinenteServiceImpl implements ContinenteService {
         return result;
     }
 
+    public void delete(Long id) {
+        continenteRepository.deleteById(id);
+    }
+
+
+    public ContinenteDTO update(Long id, ContinenteDTO dto){
+        Optional<ContinenteEntity> entity = continenteRepository.findById(id);
+        ContinenteEntity entityFind = entity.get();
+
+
+        ContinenteEntity entityUpdated = continenteMapper.updateEntity(entityFind, dto);
+        ContinenteEntity entitySaved = continenteRepository.save(entityUpdated);
+
+
+
+        ContinenteDTO result = continenteMapper.continenteEntity2DTO(entitySaved);
+        return result;
+    }
 
 }

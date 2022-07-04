@@ -1,12 +1,16 @@
 package com.alkemy.icons.icons.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "continentes")
+@SQLDelete( sql = "UPDATE continentes SET deleted = true  WHERE id=?")
+@Where(clause = "deleted=false")
 public class ContinenteEntity {
 
     @Id
@@ -15,4 +19,6 @@ public class ContinenteEntity {
 
     private String imagen;
     private String denominacion;
+
+    private boolean deleted = Boolean.FALSE;
 }
